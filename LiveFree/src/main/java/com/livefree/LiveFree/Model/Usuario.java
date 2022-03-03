@@ -1,14 +1,21 @@
 package com.livefree.LiveFree.Model;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.livefree.LiveFree.util.EUsuario;
 
 @Entity
@@ -39,6 +46,11 @@ public class Usuario {
 	
 	@NotNull
 	private String idioma;
+	
+	@OneToMany(mappedBy = "usuario", cascade = CascadeType.REMOVE)
+	@JsonIgnoreProperties("usuario")
+	private List<Servico> servicos = new ArrayList<>();
+     
 	
 	//Getters & Setters
 

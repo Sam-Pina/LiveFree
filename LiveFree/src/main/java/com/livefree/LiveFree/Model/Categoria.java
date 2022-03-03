@@ -1,14 +1,19 @@
 package com.livefree.LiveFree.Model;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
-
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.livefree.LiveFree.util.EAtendimento;
 import com.livefree.LiveFree.util.ECategoria;
 import com.livefree.LiveFree.util.EMotivo;
@@ -24,6 +29,10 @@ public class Categoria {
 	private @Enumerated(EnumType.STRING) ECategoria categoria;
 	private @Enumerated(EnumType.STRING) EAtendimento atendimento;
 	private @Enumerated(EnumType.STRING) EMotivo motivo;
+	
+	@OneToMany(mappedBy = "categoria", cascade = CascadeType.REMOVE)
+	@JsonIgnoreProperties("categoria")
+	private List<Servico> servicos = new ArrayList<>();
 
 	public long getId() {
 		return id;
