@@ -43,7 +43,7 @@ public class Servico {
 	
 	@ManyToOne(fetch = FetchType.EAGER)
 	@JsonIgnoreProperties("servicos")
-	private Usuario usuario;
+	private Usuario email;
 	
 	//Getters & Setters
 
